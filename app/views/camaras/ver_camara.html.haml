@@ -1,0 +1,102 @@
+:css
+  input{
+  width: 70%;
+  }
+  .inputbox{
+  margin-bottom: 10px !important;
+  }
+
+%a{:name => "details"}
+%h2.contentheading Información de la cámara
+%br/
+=hidden_field_tag "marcaId",@id_marca
+.contentdescription
+  .row-fluid
+    = form_tag({action: "guardar_editar_camara", controller: "camaras"}, method: "post",  id:"editarCamara") do
+      =hidden_field_tag "camaraId",@camara.id
+      .span12{:style => "margin-bottom: 10px"}
+        .span4
+          %label Marca
+        .span5
+          #marca.inputbox #{@camara.modelos.marca.nombre}
+      .span12{:style => "margin-bottom: 10px"}
+        .span4
+          %label Modelo
+        .span5
+          #modelo.inputbox #{@camara.modelos.nombre}
+      .span12{:style => "margin-bottom: 10px"}
+        .span4
+          %label IP
+        .span5
+          %input#ip.inputbox{:name => "ip", :size => "15", :type => "text", :value => "#{@camara.ip}"}/
+        .span2
+          %span#validate_ip
+      .span12{:style => "margin-bottom: 10px"}
+        .span4
+          %label Puerto
+        .span5
+          %input#puerto.inputbox{:name => "puerto", :size => "20", :type => "text", :value => "#{@camara.puerto}"}/
+      .span12{:style => "margin-bottom: 10px"}
+        .span4
+          %label Usuario
+        .span5
+          %input#usuario.inputbox{:name => "usuario", :size => "20", :type => "text", :value => "#{@camara.usuario}"}/
+      .span12{:style => "margin-bottom: 10px"}
+        .span4
+          %label Contraseña
+        .span5
+          %input#contrasena.inputbox{:name => "contrasena", :size => "20", :type => "password", :value => "#{@camara.contrasena}"}/
+      .span12{:style => "margin-bottom: 10px"}
+        .span4
+          %label Fecha registro
+        .span5
+          %label #{@camara.fecha_registro}
+      .span12{:style => "margin-bottom: 10px"}
+        .span4
+          %label Deteccion de movimiento
+        .span4
+          = select_tag :deteccion, options_for_select([["No",0],["Si",1]],@camara.deteccion_movimiento), :style => "width: 95%"
+      .span12{:style => "margin-bottom: 10px"}
+        .span4
+          %label Defectuosa
+        .span4
+          = select_tag :defectuosa, options_for_select([["No",0],["Si",1]],@camara.defectuosa), :style => "width: 95%"
+      %button.btn.btn-success{:type => "submit"} Guardar cambios
+      -if session[:rol] == "Administrador" || session[:rol] == "Superadmin"
+        .btn-group
+          = link_to "Eliminar", {:action=>"eliminar_camara", :controller =>"camaras", :id=>@camara.id, :vengo=>"0"}, :confirm => "¿Está usted seguro?",:class =>"btn"
+        .btn-group
+          = link_to "Volver", {:action=>"index", :controller=>"camaras"},:class =>"btn"
+
+:javascript
+  $(document).ready(function() {
+    $("#menu_camaras").addClass("activo");
+
+    var pattern = /\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/;
+    x = 46;
+    $('#ip').keypress(function (e) {
+        if (e.which != 8 && e.which != 0 && e.which != x && (e.which < 48 || e.which > 57)) {
+            console.log(e.which);
+            return false;
+        }
+    }).keyup(function () {
+        var this1 = $(this);
+        if (!pattern.test(this1.val())) {
+            $('#validate_ip').text('IP no válida');
+            while (this1.val().indexOf("..") !== -1) {
+                this1.val(this1.val().replace('..', '.'));
+            }
+            x = 46;
+        } else {
+            x = 0;
+            var lastChar = this1.val().substr(this1.val().length - 1);
+            if (lastChar == '.') {
+                this1.val(this1.val().slice(0, -1));
+            }
+            var ip = this1.val().split('.');
+            if (ip.length == 4) {
+                $('#validate_ip').text('');
+            }
+        }
+    });
+  });    

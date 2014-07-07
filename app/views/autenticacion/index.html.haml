@@ -1,0 +1,30 @@
+- content_for :title, "Clíentes autenticados"
+%a{:name => "details"}
+%h2.contentheading Clientes autenticados
+%br/
+%table.table.table-striped
+  -if @clientes_autenticados.nil?
+    %thead
+      %tr
+        %th No hay clientes registrados 
+  -else 
+    %thead
+      %tr
+        %th IP
+        %th Acciones
+  %tbody
+    -unless @clientes_autenticados.nil?
+      -@clientes_autenticados.each do  |cliente|
+        %tr
+          %td 
+            ="#{cliente.ip}"
+          %td
+            .btn-group
+              -if session[:rol] == "Administrador" || session[:rol] == "Superadmin"
+                = link_to "Eliminar", {:action=>"eliminar_cliente", :controller =>"autenticacion", :id=>cliente.id}, :confirm => "¿Está usted seguro?",:class =>"btn"
+
+      
+:javascript
+  $(document).ready(function() {
+    $("#menu_clientes").addClass("activo");
+  });

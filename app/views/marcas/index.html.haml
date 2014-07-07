@@ -1,0 +1,35 @@
+%a{:name => "details"}
+%h2.contentheading Fabricantes de cámaras
+%br/
+%table.table.table-striped
+  -if @marcas.empty?
+    %thead
+      %tr
+        %th No hay fabricantes registrados 
+  -else 
+    %thead
+      %tr
+        %th Fabricante
+        %th Acciones
+  %tbody
+    -unless @marcas.nil?
+      -@marcas.each do  |marca|
+        %tr
+          %td 
+            ="#{marca.nombre}"
+          %td
+            .btn-group
+              -if session[:rol] == "Administrador" || session[:rol] == "Superadmin"
+                = link_to "Editar fabricante", {:action=>"editar_marca",:id=>marca.id},:class =>"btn"
+                = link_to "Ver modelos", {:action=>"ver_modelos",:id=>marca.id},:class =>"btn"
+                = link_to "Eliminar", {:action=>"eliminar_marca",:id=>marca.id},:class =>"btn"
+.span12
+  .btn-group
+    -if session[:rol] == "Administrador" || session[:rol] == "Superadmin"
+      = link_to "Añadir un nuevo fabricante", {:action=>"agregar_marca"},:class =>"btn"
+
+:javascript
+  $(document).ready(function() {
+    $("#menu_marcas").addClass("activo");
+  });                
+                  

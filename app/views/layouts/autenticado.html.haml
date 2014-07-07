@@ -1,0 +1,117 @@
+!!!
+%html
+  %head
+    %meta{:charset => "utf-8"}/
+    %title= full_title(yield(:title))
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "", :name => "author"}/
+    = stylesheet_link_tag    "bootstrap.min", :media => "all"
+    = stylesheet_link_tag    "datepicker", :media => "all"
+    = stylesheet_link_tag    "bootstrap-timepicker.min", :media => "all"
+    = stylesheet_link_tag    "jquery.fancybox", :media => "all"
+    = stylesheet_link_tag    "jquery.fancybox-buttons", :media => "all"
+    = stylesheet_link_tag    "jquery.fancybox-thumbs", :media => "all"
+    = stylesheet_link_tag    "custom", :media => "all"
+    = stylesheet_link_tag    "styles", :media => "all"
+    = stylesheet_link_tag    "estilos", :media => "all"
+    = stylesheet_link_tag    "slider", :media => "all"
+    = javascript_include_tag    "jquery-1.10.2.min"
+    = javascript_include_tag    "bootstrap.min"
+    = javascript_include_tag    "jquery.validate"
+    = javascript_include_tag    "script"
+    = javascript_include_tag    "jquery.fancybox.pack"
+    = javascript_include_tag    "jquery.fancybox-buttons"
+    = javascript_include_tag    "jquery.fancybox-media"
+    = javascript_include_tag    "jquery.fancybox-thumbs"
+    = javascript_include_tag    "bootstrap-datepicker"
+    = javascript_include_tag    "bootstrap-timepicker.min"
+    = javascript_include_tag    "bootstrap-slider"
+    = javascript_include_tag    "rails"
+    = csrf_meta_tags
+
+  %body
+    .container{:style => " margin: 0 auto !important;"}
+      .row
+      
+        .navbar.navbar-inverse.navbar-fixed-top.span12{role: "navigation", :style =>"position: relative;"}
+          .navbar-inner{:style => "  "}
+            .container
+              %a.brand{:target=>"_blank",:href => "http://localhost:3000/principal/galeria", :style => "margin-left:0px;"}
+                %i.icon-home.icon-white{:style => "margin-left:10px; !important;"}
+              %div.span5
+                %p.navbar-text Middleware
+              .pull-right
+                %ul.nav.pull-right
+                  %li.dropdown
+                    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                      Bienvenid@ 
+                      =session[:usuario].nombre_completo
+                      %b.caret
+                    %ul.dropdown-menu
+                      %li
+                        %a{:href => "http://localhost:3000/principal/ver_datos"}
+                          %i.icon-user.glyphb
+                          Ver mis datos
+                      %li
+                        %a{:href =>"/cerrar_sesion"}
+                          %i.icon-off
+                          Salir
+      %p
+      - if flash[:error2]
+        .errorr
+          =flash[:error2]
+      - if flash[:error]
+        .errorr
+          =flash[:error]
+      - if flash[:exito]
+        .exito
+          =flash[:exito]
+      %br/
+      .row-fluid
+        .span12
+          .front-welcome-text
+            %h2
+
+        #wrapper.container-fluid{:style => "padding-left: 0px;padding-right:0px"}
+          .row-fluid
+            #frmOptions.well.form-inline.span12{:method => "post", :name => "frmOptions",:style => "background-color: #FFFFFF"}
+              .top-blocks
+                .left{:style => "width: 22%"}
+                  #leftMenu.accordion
+                    %ul.nav.nav-list
+                      %li.active
+                        %i.icon-time.glyphb
+                        %span Historial
+                      %li{:id=>"menu_historialImagenes",:style => "margin-left: 10px"}
+                        %a{:target=>"_blank",:href => "http://localhost:3000/principal/galeria"} Im&aacute;genes
+                      %li{:id=>"menu_log",:style => "margin-left: 10px"}
+                        %a{:target=>"_blank",:href => "http://localhost:3000/principal/log"} Bit&aacute;cora
+                      %li.active
+                        %i.icon-pencil.glyphb
+                        %span Administraci&oacute;n
+                      %li{:id=>"menu_camaras",:style => "margin-left: 10px"}
+                        .camaras{:style=>"width:170px;height:20px;"}
+                          %a{:target=>"_blank",:href => "http://localhost:3000/principal/camaras_administrador"} Cámaras
+                      %li{:id=>"menu_mapas",:style => "margin-left: 10px"}
+                        %a{:target=>"_blank",:href => "http://localhost:3000/principal/mapas"} Mapas
+                      -if session[:rol] == "Administrador" || session[:rol] == "Superadmin"
+                        %li{:id=>"menu_usuarios",:style => "margin-left: 10px"}
+                          %a{:target=>"_blank",:href => "http://localhost:3000/principal/usuarios"} Usuarios
+                        %li{:id=>"menu_clientes",:style => "margin-left: 10px"}
+                          %a{:href => "/autenticacion/"} Clientes
+                        %li{:id=>"menu_marcas",:style => "margin-left: 10px"}
+                          %a{:href => "/marcas/"} Fabricantes
+                      -if session[:rol] == "Superadmin"
+                        %li.active
+                          %i.icon-wrench.glyphb
+                          %span Configuraci&oacute;n
+                        %li{:id=>"menu_temporal",:style => "margin-left: 10px"}
+                          %a{:href => "/temporal/"} Persistencia de archivos
+                        %li{:id=>"menu_ftp",:style => "margin-left: 10px"}
+                          %a{:href => "/ftp/"} FTP
+                    %br
+                .right{:style => "width: 75%"}
+                  .module.light.features
+                    = yield
+    %footer{:style => "text-align:center"} Universidad Central de Venezuela - Facultad de Ciencias - Escuela de Computación 

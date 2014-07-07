@@ -1,0 +1,123 @@
+= javascript_include_tag    "jquery-1.10.2.min"
+= javascript_include_tag    "jquery.validate"
+= javascript_include_tag    "script"
+:css
+  body {
+  
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+  }
+
+           
+  .left {
+  float: left;
+  margin-right: 8px;
+  }
+  .right {
+  float: right;
+  padding: 0px 0px 10px;
+  }
+
+  .borde {
+  float: right;
+  border-left: 1px solid #e5e5e5;
+  padding: 0px 0px 10px;
+  }
+
+  .module {
+  overflow: hidden;
+  }
+  .light {
+  border: 1px; 
+  padding: 16px 19px 20px 16px;
+  }
+
+  .name label, .pass label {
+  margin-bottom: 10px;
+  display: inline-block;
+  float: left;
+  width: 89px;
+  }
+
+  .form-actions {
+  background-color: #fffff;   
+  margin-bottom: 0px;       
+  }
+  .well {
+  background-color: #f5f5f5;          
+  }
+  .contentheading {
+  border-bottom: 1px solid #e5e5e5;
+  padding: 0px 0px 10px;
+  }
+
+        
+
+
+
+.container
+  .row-fluid
+    .span12
+      .front-welcome-text{:style => "text-align:center"}
+        %h3 Sistema de administración de cámaras de seguridad
+        <p>
+        
+        </p>
+        <p>
+        
+        </p>
+    #wrapper.container-fluid
+      .span3
+      .span6
+        .row-fluid
+          .well.form-inline.span12{:style => "background-color: #FFFFFF"}
+            .top-blocks
+              = form_tag({action: "validar", controller: "inicio"}, method: "post", class: "signin", id:"signin") do
+                -if @referer.present?
+                  =hidden_field_tag "referer",@referer
+                -else
+                  =hidden_field_tag "referer",nil
+                %h2.contentheading Iniciar sesión
+                %br/
+                .span4
+                  .control-group
+                    %label.control-label
+                    .controls
+                      %label{:for => "to", :style => "margin-left: 15px"} Email:
+                .control-group
+                  %label.control-label
+                  .controls
+                    = text_field :usuario , :email, :for=>"email",:placeholder=>"Email",:required=>"",:type=>"email", :name => "usuarioEmail"
+                .span4
+                  .control-group
+                    %label.control-label
+                    .controls
+                      %label{:for => "to", :style => "margin-left: 15px"} Contraseña:
+                .control-group
+                  %label.control-label
+                  .controls
+                    = password_field :usuario , :clave,:placeholder=>"Contraseña",:required=>"",:type=>"password", :name => "usuarioClave"
+                = link_to "¿Olvidó su cotraseña?",:action=>"olvido_contrasena"
+                .form-actions
+                  %button.btn.btn-success{:type => "submit"} Iniciar sesión
+ 
+
+:javascript
+
+$(document).ready(function(){
+
+  // Validate
+  // http://bassistance.de/jquery-plugins/jquery-plugin-validation/
+  // http://docs.jquery.com/Plugins/Validation/
+  // http://docs.jquery.com/Plugins/Validation/validate#toptions
+
+  
+   
+    
+    
+}); // end document.ready
+
+   
+
+
+   

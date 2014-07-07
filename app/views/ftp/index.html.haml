@@ -1,0 +1,52 @@
+%a{:name => "details"}
+%h2.contentheading Configuración FTP
+%br/
+= form_tag({action: "editar_ftp", controller: "ftp"}, method: "post",  id:"editarFTP") do
+  .span{:style=>"padding:5px;"}
+    .control-group
+      .controls
+        %label{:for => "to", :style => "width:100px;margin-left: 0px;padding-right:20px;"} Host:
+        -if @ftp.present?
+          %input.inputbox{:name => "host",  :style => "margin-right: 15px",:size => "20", :required=>"", :type => "text", :value => "#{@ftp.host}"}/
+        -else
+          %input.inputbox{:name => "host",  :style => "margin-right: 15px",:size => "20", :required=>"", :type => "text", :value => ""}/
+  .span{:style=>"padding:5px;"}
+    .control-group
+      .controls
+        %label{:for => "to", :style => "width:100px;margin-left: 0px;padding-right:20px;"} Puerto:
+        -if @ftp.present?
+          %input.inputbox{:name => "puerto",  :style => "margin-right: 15px",:size => "20", :required=>"", :type => "text", :value => "#{@ftp.puerto}"}/
+        -else
+          %input.inputbox{:name => "puerto",  :style => "margin-right: 15px",:size => "20", :required=>"", :type => "text", :value => ""}/
+  .span{:style=>"padding:5px;"}
+    .control-group
+      .controls
+        %label{:for => "to", :style => "width:100px;margin-left: 0px;padding-right:20px;"} Usuario:
+        -if @ftp.present?
+          %input.inputbox{:name => "usuario",  :style => "margin-right: 15px",:size => "20", :required=>"", :type => "text", :value => "#{@ftp.usuario}"}/
+        -else
+          %input.inputbox{:name => "usuario",  :style => "margin-right: 15px",:size => "20", :required=>"", :type => "text", :value => ""}/
+  .span{:style=>"padding:5px;"}
+    .control-group
+      .controls
+        %label{:for => "to", :style => "width:100px;margin-left: 0px;padding-right:20px;"} Clave:
+        -if @ftp.present?
+          %input.inputbox{:name => "clave", :style => "margin-right: 15px", :size => "20", :required=>"", :type => "password", :value => "#{@ftp.clave}"}/
+        -else
+          %input.inputbox{:name => "clave", :style => "margin-right: 15px", :size => "20", :required=>"", :type => "password", :value => ""}/
+  .span{:style=>"padding:5px;"}
+    .control-group
+      .controls
+        %label{:for => "to", :style => "width:100px;margin-left: 0px;padding-right:20px;"} Path:
+        -if @ftp.present?
+          %input.inputbox{:name => "path", :style => "margin-right: 15px", :size => "20", :required=>"", :type => "text", :value => "#{@ftp.path}"}/
+        -else
+          %input.inputbox{:name => "path", :style => "margin-right: 15px", :size => "20", :required=>"", :type => "text", :value => ""}/
+  .span12
+    %button.btn.btn-success{:type => "submit"} Editar
+
+:javascript
+  $(document).ready(function() {
+    $("#menu_ftp").addClass("activo");
+  });                
+      

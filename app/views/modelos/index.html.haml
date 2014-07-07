@@ -1,0 +1,33 @@
+%a{:name => "details"}
+%h2.contentheading Modelos de cámaras
+%br/
+%table.table.table-striped
+  -if @modelos.empty?
+    %thead
+      %tr
+        %th No hay modelos registrados 
+  -else 
+    %thead
+      %tr
+        %th Modelos
+        %th Acciones
+  %tbody
+    -unless @modelos.nil?
+      -@modelos.each do  |modelo|
+        %tr
+          %td 
+            ="#{modelo.nombre}"
+          %td
+            .btn-group
+              -if session[:rol] == "Administrador" || session[:rol] == "Superadmin"
+                = link_to "Eliminar", {:action=>"eliminar_modelo",:id=>modelo.id},:class =>"btn"
+.span12
+  .btn-group
+    -if session[:rol] == "Administrador" || session[:rol] == "Superadmin"
+      = link_to "Añadir un nuevo modelo", {:action=>"agregar_modelo"},:class =>"btn"
+      = link_to "Volver", {:action=>"index"},:class =>"btn"
+:javascript
+  $(document).ready(function() {
+    $("#menu_marcas").addClass("activo");
+  });                
+      

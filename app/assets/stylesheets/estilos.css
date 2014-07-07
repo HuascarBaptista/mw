@@ -1,0 +1,63 @@
+body {
+  
+}
+     
+.left {
+float: left;
+margin-right: 8px;
+}
+
+.right {
+float: right;
+
+margin: 0;
+padding: 0;
+
+border-left: 1px solid #e5e5e5;
+padding: 0px 0px 10px;
+
+}
+
+.module {
+overflow: hidden;
+}
+.light {
+border: 1px; 
+padding: 16px 19px 20px 16px;
+margin-left: 15px;
+
+}
+
+.name label, .pass label {
+
+  margin-bottom: 10px;
+
+  
+  display: inline-block;
+  float: left;
+  width: 89px;
+}
+
+
+.contentheading { 
+    border-bottom: 1px 
+    solid #e5e5e5;
+    padding: 0px 0px 10px;
+}
+
+element.style {
+  width: 500;
+}
+
+.well {
+   
+  background-color: #FFFFFF;          
+}
+
+.letra {
+  font-size: 10px;
+}
+
+select{
+  font-size: 12px;
+}

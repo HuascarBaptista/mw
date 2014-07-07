@@ -1,0 +1,44 @@
+%a{:name => "details"}
+%h2.contentheading Cámaras
+%br/
+%table.table.table-striped
+  -unless @camaras.nil?
+    %thead
+      %tr
+        %th Id de la cámara
+        %th Modelo
+        %th IP
+        %th Usuario
+        %th Contraseña
+        %th Acciones
+  -else 
+    %thead
+      %tr
+        %th No hay cámaras registrados 
+  %tbody
+    -unless @camaras.nil?
+      -@camaras.each do  |camara|
+        %tr
+          %td 
+            ="#{camara.id}"
+          %td 
+            =camara.modelos.nombre
+          %td 
+            ="#{camara.ip}"
+          %td 
+            ="#{camara.usuario}"
+          %td 
+            ="#{camara.contrasena}"
+          %td
+            .btn-group
+              -if session[:rol] == "Administrador" || session[:rol] == "Superadmin"
+                = link_to "Editar", {:action=>"ver_camara",:id=>camara.id},:class =>"btn"
+                = link_to "Eliminar", {:action=>"eliminar_camara", :controller =>"camaras", :id=>camara.id}, :confirm => "¿Está usted seguro?",:class =>"btn"
+.span12
+  .btn-group
+    -if session[:rol] == "Administrador" || session[:rol] == "Superadmin"
+      = link_to "Añadir una nueva cámara", {:action=>"agregar_camara_marca"},:class =>"btn"
+:javascript
+  $(document).ready(function() {
+    $("#menu_marcas").addClass("activo");
+  });    

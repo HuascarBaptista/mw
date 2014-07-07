@@ -1,0 +1,72 @@
+:css
+  body {
+  
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+  }
+
+           
+  
+  .right {
+  float: right;
+  padding: 0px 0px 10px;
+  }
+
+  .borde {
+  float: right;
+  border-left: 1px solid #e5e5e5;
+  padding: 0px 0px 10px;
+  }
+
+  
+  
+
+  .name label, .pass label {
+  margin-bottom: 10px;
+  display: inline-block;
+  float: left;
+  width: 89px;
+  }
+
+  .well {
+  background-color: #f5f5f5;          
+  }
+  .form-actions {
+  background-color: #fffff;   
+  margin-bottom: 0px;       
+  }
+  
+
+.container
+  .row-fluid
+    .span12
+      .front-welcome-text{:style => "text-align:center"}
+        %h2 Sistema de administración de cámaras de seguridad
+        <p>
+        
+        </p>
+        <p>
+        
+        </p>
+    #wrapper.container-fluid
+      .span3
+      .span6
+        .row-fluid
+          .well.form-inline.span12{:style => "background-color: #FFFFFF"}
+            .top-blocks
+              = form_tag({action: "recordar_contrasena", controller: "inicio"}, method: "post", class: "recordar_contrasena", id:"recordar_contrasena") do
+                %a{:name => "details"}
+                %h3.contentheading ¿Olvidó su contraseña?
+                %br/
+                .form-signin-heading Por favor, escriba la dirección de correo electrónico que utiliza para ingresar al sistema.
+                %br/
+                .span2
+                .control-group
+                  %label.control-label
+                  .controls
+                    %input{:for => "email", :placeholder => "Email", :required => "",  :type => "email",:name => "usuario_email"}/
+                .form-actions
+                  %button.btn.btn-success{:type => "submit"} Recordar
+                  .btn-group
+                    %a.btn{:href => "index"}
+                      Volver

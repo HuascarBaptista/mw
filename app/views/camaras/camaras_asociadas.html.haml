@@ -1,0 +1,45 @@
+%a{:name => "details"}
+%h2.contentheading Cámaras asociadas
+%br/
+=hidden_field_tag "marcaId",@id_marca
+%table.table.table-striped
+  -unless @camaras.empty?
+    %thead
+      %tr
+        %th Fabricante
+        %th Modelo
+        %th IP
+        %th Usuario
+        %th Contraseña
+        %th Acciones
+  -else 
+    %thead
+      %tr
+        %th No hay cámaras asociadas a este modelo 
+  %tbody
+    -unless @camaras.nil?
+      -@camaras.each do  |camara|
+        %tr
+          %td 
+            ="#{@marca.nombre}"
+          %td 
+            ="#{@modelo.nombre}"
+          %td 
+            ="#{camara.ip}"
+          %td 
+            ="#{camara.usuario}"
+          %td 
+            ="#{camara.contrasena}"
+          %td
+            .btn-group
+              -if session[:rol] == "Administrador" || session[:rol] == "Superadmin"
+                = link_to "Editar", {:action=>"ver_camara",:id=>camara.id},:class =>"btn"
+                = link_to "Eliminar", {:action=>"eliminar_camara", :controller =>"camaras", :id=>camara.id, :vengo=>"0"}, :confirm => "¿Está usted seguro?",:class =>"btn"
+.span12
+  .btn-group
+    -if session[:rol] == "Administrador" || session[:rol] == "Superadmin"
+      = link_to "Volver", {:action=>"ver_modelos", :controller=>"marcas",:id=>@id_marca},:class =>"btn"
+:javascript
+  $(document).ready(function() {
+    $("#menu_marcas").addClass("activo");
+  });    

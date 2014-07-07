@@ -1,0 +1,4 @@
+.span3
+  -unless @modelos.nil?
+    = select_tag :modelo, options_for_select(@modelos.map {|v| [ v['nombre'], v['id'] ] }), :prompt => 'Modelo', :id => "selectModelo", :style => "width: 85%"
+%button.btn.btn-success{:type => "submit"} Siguiente

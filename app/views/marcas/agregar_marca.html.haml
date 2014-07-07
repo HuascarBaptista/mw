@@ -1,0 +1,23 @@
+%a{:name => "details"}
+%h2.contentheading Añadir un fabricante
+%br/
+= form_tag :action => "agregar_marca_def",controller: "marcas",:method => "post",:class => "form-marcaModelo", :id=>"marcaModelo-form" do
+  .span2
+    .control-group
+      .controls
+        %label{:for => "to", :style => "margin-left: 0px"} Fabricante:
+  .span2
+    .control-group
+      .controls
+        %input#nombre.inputbox{:name => "nombre", :size => "20", :required=>"", :type => "text", :value => ""}/
+  .span12
+    %button.btn.btn-success{:type => "submit"} Agregar
+    .btn-group
+      = link_to "Volver", {:action=>"index"},:class =>"btn"
+    
+:javascript
+  $(document).ready(function() {
+    $("#menu_marcas").addClass("activo");
+  });                
+                      
+                  

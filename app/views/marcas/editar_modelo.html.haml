@@ -1,0 +1,59 @@
+
+%a{:name => "details"}
+%h2.contentheading Editar modelo
+%br
+= form_tag(controller: "marcas", action: "cambiar_modelo", method: "post") do
+  .span12{:style => "margin-bottom: 10px"}
+    =hidden_field_tag "modeloId",@id_modelo
+    =hidden_field_tag "marcaId",@id_marca
+    .span6{ :style => "margin-left: 0px " }
+      %label{ :style => "margin-bottom: 10px " }  Fabricante 
+    .span4{ :style => "margin-left: 0px " }
+      %label{ :style => " margin-bottom: 10px " }  #{@marca.nombre}
+    .span6{ :style => "margin-left: 0px " }
+      %label{ :style => "margin-bottom: 10px " }  Nombre
+    .span4{ :style => "margin-left: 0px " }
+      %input#nombre.inputbox{:name => "nombre", :size => "20", :required=>"", :type => "text", :value => "#{@modelo.nombre}", :style => "width: 93%; margin-bottom: 10px"}
+    .span6{ :style => "margin-left: 0px " }
+      %label{ :style => "margin-bottom: 10px " }  Detección movimiento
+    .span4{ :style => "margin-left: 0px " }
+      = select_tag :deteccion_movimiento, options_for_select([["No",0],["Si",1]],@modelo.deteccion_movimiento),  { :style => "width: 100%; margin-bottom: 10px ",:id=>"detec" } 
+    
+    .span6.escondidos{ :style => "display:none;clear:left;margin-left: 0px;" }  
+      %label{ :style => "margin-bottom: 10px ;" }  Ancho máximo de la imágen permitido por la cámara
+    .span4.escondidos{ :style => "display:none;margin-left: 0px;" }  
+      %input.inputbox{:name => "ancho_maximo", :size => "20", :required=>"", :type => "text", :value => "#{@modelo.ancho_maximo}", :style => "margin-bottom: 10px; width: 93%;"}
+    .span6.escondidos{ :style => "display:none;clear:left;margin-left: 0px;" }  
+      %label{ :style => "margin-bottom: 10px;" }  Alto máximo de la imágen permitido por la cámara
+    .span4.escondidos{ :style => "display:none;margin-left: 0px;" }  
+      %input.inputbox{:name => "alto_maximo", :size => "20", :required=>"", :type => "text", :value => "#{@modelo.alto_maximo}", :style => "margin-bottom: 10px; width: 93%;"}
+    .span6{ :style => "clear:left;margin-left: 0px;" }  
+      %label{ :style => "margin-bottom: 10px " }  Rotación
+    .span4{ :style => "margin-left: 0px " }
+      = select_tag :rotacion, options_for_select([["No",0],["Si",1]],@modelo.rotacion),{ :style => "width: 100%; margin-bottom: 10px " } 
+    .span6{ :style => "margin-left: 0px " }
+      %label{ :style => "margin-bottom: 10px " }  Controlador
+    .span4{ :style => "margin-left: 0px " }
+      = select_tag "objeto", options_for_select(@controladores,@modelo.objeto),{ :style => "width: 100%; " } 
+  .span12
+    .btn-group
+      = submit_tag "Guardar", {:class =>"btn"}
+    .btn-group
+      = link_to "Volver", {:action=>"ver_modelos", :id => @id_marca},:class =>"btn"
+:javascript
+  $(document).ready(function() {
+    $(document).on("change","#detec",function(){
+      if($("#detec").val()==0){
+        $(".escondidos").fadeOut("fast");
+      }else{
+        $(".escondidos").fadeIn("fast");
+      }
+    });
+    if($("#detec").val()==0){
+        $(".escondidos").fadeOut("fast");
+      }else{
+        $(".escondidos").fadeIn("fast");
+      }
+    $("#menu_marcas").addClass("activo");
+  });                
+      

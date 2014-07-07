@@ -1,0 +1,16 @@
+%a{:name => "details"}
+%h2.contentheading Pruebas
+%br/
+= form_tag :action => "prueba",:method => "post" do
+  .span{:style=>"padding:5px;"}
+    .control-group
+      .controls
+        %label{:for => "to", :style => "width:100px;margin-left: 0px;padding-right:20px;"} Ip:
+        %input.inputbox{:name => "ip", :size => "20", :required=>"", :type => "text"}/
+  .span{:style=>"padding:5px;"}
+    .control-group
+      .controls
+        %label{:for => "to", :style => "width:100px;margin-left: 0px;padding-right:20px;"} Accion:
+        %input.inputbox{:name => "accion", :size => "20", :required=>"", :type => "text", :value => ""}/
+  .span12
+    %button.btn.btn-success{:type => "submit"} Probar

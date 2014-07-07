@@ -1,0 +1,81 @@
+!!!
+%html
+  %head
+    %meta{:charset => "utf-8"}/
+    %title= full_title(yield(:title))
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "", :name => "author"}/
+    = stylesheet_link_tag    "bootstrap.min", :media => "all"
+    = stylesheet_link_tag    "datepicker", :media => "all"
+    = stylesheet_link_tag    "bootstrap-timepicker.min", :media => "all"
+    = stylesheet_link_tag    "jquery.fancybox", :media => "all"
+    = stylesheet_link_tag    "jquery.fancybox-buttons", :media => "all"
+    = stylesheet_link_tag    "jquery.fancybox-thumbs", :media => "all"
+    = stylesheet_link_tag    "custom", :media => "all"
+    = stylesheet_link_tag    "styles", :media => "all"
+
+    
+    = stylesheet_link_tag    "slider", :media => "all"
+    = javascript_include_tag    "jquery-1.10.2.min"
+    = javascript_include_tag    "bootstrap.min"
+    = javascript_include_tag    "jquery.validate"
+    = javascript_include_tag    "script"
+    = javascript_include_tag    "jquery.fancybox.pack"
+    = javascript_include_tag    "jquery.fancybox-buttons"
+    = javascript_include_tag    "jquery.fancybox-media"
+    = javascript_include_tag    "jquery.fancybox-thumbs"
+    = javascript_include_tag    "bootstrap-datepicker"
+    = javascript_include_tag    "bootstrap-timepicker.min"
+    = javascript_include_tag    "bootstrap-slider"
+    = javascript_include_tag    "rails"
+    
+    
+
+    
+    = csrf_meta_tags
+  %body{:style => " padding-top: 60px;"}
+    .container
+      .row-fluid
+        .span12{:style => "position: relative;"}
+          .span2
+            =image_tag("ucv.png",:size => "100x100")
+          .span8
+            .span12{:style => " text-align:center; "}
+              .front-welcome-text
+                %h3
+                  Universidad Central de Venezuela
+            .span12{:style => " margin-left: 0px; text-align:center; "}
+              .front-welcome-text
+                %h2
+                  Facultad de Ciencias
+          .span2{:style => "position: absolute;right: 0px;width: auto;"}
+            =image_tag("logociens.jpg",:size => "100x100")
+            
+        .navbar.navbar-inverse.navbar-fixed-top.span12{:style => "margin-left: 0"}
+          .navbar-inner
+            .container
+              %a.brand{:href =>"/index", :style => "margin-left:0px;"}
+                %i.icon-home.icon-white{:style => "margin-left:10px; !important;"}
+              %div.span5
+                %p.navbar-text Middleware    
+    
+
+    
+   
+    
+    
+
+    %p
+    - if flash[:error2]
+      .errorr
+        =flash[:error2]
+    - if flash[:error]
+      .errorr
+        =flash[:error]
+    - if flash[:exito]
+      .exito
+        =flash[:exito]
+    %br/
+    = yield
+    %footer{:style => "text-align:center"} Universidad Central de Venezuela - Facultad de Ciencias - Escuela de Computación 

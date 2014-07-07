@@ -1,0 +1,19 @@
+%a{:name => "details"}
+%h2.contentheading Modelo
+%br/
+.span12{:style => "margin-bottom: 10px"}
+	=hidden_field_tag "marcaId",@id_marca
+  .span3
+    %label Nombre
+  .span6
+    %input#nombre.inputbox{:name => "nombre", :size => "20", :required=>"", :type => "text", :value => ""}/
+.span12
+  .btn-group
+    = link_to "Agregar", {:action=>"agregar_modelo_def",:nombre => "nombre"},:class =>"btn"
+    = link_to "Volver", {:action=>"index", :id => @id_marca},:class =>"btn"
+
+:javascript
+  $(document).ready(function() {
+    $("#menu_marcas").addClass("activo");
+  });                
+      

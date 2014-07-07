@@ -1,0 +1,30 @@
+:css
+  label {
+  margin-top: 5px;
+  }
+%a{:name => "details"}
+%h2.contentheading Persistencia de archivos
+%br/
+%p A continuación se debe indicar la cantidad de días en los que las imágenes permanecerán en el servidor sin ser eliminadas.
+%p Al transcurrir esta cantidad de días desde la última fecha de modificación de la imagen la misma será borrada del sistema.
+= form_tag({action: "editar_valor", controller: "temporal"}, method: "post",  id:"editarTemporal") do
+  .span5{:style => "margin-left: 0px"}
+    .control-group
+      .controls
+        %label{:for => "to", :style => "margin-left: 0px"} Mantener las imágenes en el servidor
+  .span2{ :style => "margin-left: 0px"}
+    .control-group
+      .controls
+        %input#nombre.inputbox{:name => "valor", :style => "width: 80%", :size => "3", :required=>"", :type => "text", :value => "#{@tengo}"}/
+  .span2
+    .control-group
+      .controls
+        %label{:for => "to", :style => "margin-left: 0px"}días.
+  .span12{ :style => "margin-left: 0px"}
+    %button.btn.btn-success{:type => "submit"} Guardar
+    
+:javascript
+  $(document).ready(function() {
+    $("#menu_temporal").addClass("activo");
+  });                    
+                  
